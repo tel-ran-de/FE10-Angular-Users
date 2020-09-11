@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponentComponent } from './user-component/user-component.component';
+import { FilterContainerComponent } from './filter-container/filter-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponentComponent
+    UserComponentComponent,
+    FilterContainerComponent
   ],
   imports: [
     BrowserModule,
