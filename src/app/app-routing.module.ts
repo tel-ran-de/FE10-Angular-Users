@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {FilterContainerComponent} from './filter-container/filter-container.component';
+import {FilterContainerComponent} from './component/filter-container/filter-container.component';
 
 const routes: Routes = [
   {
