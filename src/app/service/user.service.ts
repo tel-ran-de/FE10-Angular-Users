@@ -1,32 +1,19 @@
 import { Injectable } from '@angular/core';
 import {User} from '../model/user';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  users: User[] = [
-    {
-      id: '1',
-      firstName: 'Vasya',
-      lastName: 'Pupkin',
-      age: 20,
-      city: 'Berlin'
-    },
-    {
-      id: '1',
-      firstName: 'John',
-      lastName: 'Connor',
-      age: 35,
-      city: 'Los Angeles'
-    }
-  ];
+  users: User[];
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  getUsers(): User[] {
-    return this.users;
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>('assets/users.json');
   }
 
   getUserById(id: string): User {
