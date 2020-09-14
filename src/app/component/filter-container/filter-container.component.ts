@@ -12,22 +12,16 @@ export class FilterContainerComponent implements OnInit {
 
   users: User[];
 
-  filterObject: User = {
-    firstName: null,
-    lastName: null,
-    age: null,
-    city: null
-  };
-
   constructor(private route: ActivatedRoute,
               private userService: UserService) { }
 
   ngOnInit(): void {
+    const filter = [];
     this.route.params.subscribe(params => {
       Object.keys(params).forEach((key) =>
-        this.filterObject[key] = params[key]
+        filter.push({ key, value: params[key]})
       );
-      this.users = this.userService.getFilteredUsers(this.filterObject);
+      this.users = this.userService.getFilteredUsers(filter);
     });
   }
 
