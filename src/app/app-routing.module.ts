@@ -4,6 +4,10 @@ import {FilterContainerComponent} from './filter-container/filter-container.comp
 
 const routes: Routes = [
   {
+    path: 'users',
+    component: FilterContainerComponent
+  },
+  {
     path: 'users/first-name/:firstName',
     component: FilterContainerComponent
   },

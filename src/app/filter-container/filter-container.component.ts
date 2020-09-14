@@ -46,13 +46,13 @@ export class FilterContainerComponent implements OnInit {
     this.users.forEach(user => {
       Object.keys(filter).forEach( key => {
         if (filter[key] !== null) {
-          if (user[key] === filter[key]) {
+          if (user[key].toString() === filter[key].toString()) {
             filteredUsers.push(user);
           }
         }
       });
     });
-    return filteredUsers;
+    return filteredUsers.length === 0 ? users : filteredUsers;
   }
 
 }
