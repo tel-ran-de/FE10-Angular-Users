@@ -11,6 +11,7 @@ import {UserService} from '../../service/user.service';
 export class FilterContainerComponent implements OnInit {
 
   users: User[];
+  user: User;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService) { }
@@ -18,10 +19,14 @@ export class FilterContainerComponent implements OnInit {
   ngOnInit(): void {
     const filter = [];
     this.route.params.subscribe(params => {
-      Object.keys(params).forEach((key) =>
-        filter.push({ key, value: params[key]})
-      );
-      this.users = this.userService.getFilteredUsers(filter);
+      if (params.id) {
+        this.user = this.userService.getUserById(params.id);
+      } else {
+        Object.keys(params).forEach((key) =>
+          filter.push({ key, value: params[key]})
+        );
+        this.users = this.userService.getFilteredUsers(filter);
+      }
     });
   }
 

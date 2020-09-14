@@ -8,6 +8,10 @@ const routes: Routes = [
     component: FilterContainerComponent
   },
   {
+    path: 'users/:id',
+    component: FilterContainerComponent
+  },
+  {
     path: 'users/first-name/:firstName',
     component: FilterContainerComponent
   },

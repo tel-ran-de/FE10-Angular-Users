@@ -8,12 +8,14 @@ export class UserService {
 
   users: User[] = [
     {
+      id: '1',
       firstName: 'Vasya',
       lastName: 'Pupkin',
       age: 20,
       city: 'Berlin'
     },
     {
+      id: '1',
       firstName: 'John',
       lastName: 'Connor',
       age: 35,
@@ -25,6 +27,10 @@ export class UserService {
 
   getUsers(): User[] {
     return this.users;
+  }
+
+  getUserById(id: string): User {
+    return this.users.find(user => user.id === id);
   }
 
   getFilteredUsers(filter: {key: string, value: any}[]): User[] {
