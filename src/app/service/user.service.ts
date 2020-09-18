@@ -23,9 +23,17 @@ export class UserService {
     );
   }
 
-  getFilteredUsers(filter: {key: string, value: any}[]): User[] {
+  getFilteredUsers(filter: {key: string, value: any}[]): Observable<User[]> {
+
+    return this.getUsers().pipe(
+
+    );
+
+  }
+
+  private syncFilter(filter: {key: string, value: any}[], users: User[]): User[] {
     const filteredUsers: User[] = [];
-    this.getUsers().forEach(user => {
+    users.forEach(user => {
       filter.forEach( element => {
           if (user[element.key].toString() === element.value.toString()) {
             filteredUsers.push(user);
