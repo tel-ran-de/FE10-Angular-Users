@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../model/user';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-user-component',
@@ -10,6 +11,9 @@ export class UserComponentComponent implements OnInit {
 
   @Input()
   user: User;
+
+  @Input()
+  asyncUser: Observable<User>;
 
   constructor() { }
 
