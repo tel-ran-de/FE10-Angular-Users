@@ -11,6 +11,7 @@ export class UserService {
 
   users: User[];
 
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -18,33 +19,28 @@ export class UserService {
     return this.httpClient.get<User[]>('assets/users.json');
   }
 
-  getUserById(obs: Observable<User>): Observable<User> {
+  getUserById(id: string): Observable<User> {
     return this.getUsers().pipe(
-      map(users => users.find(user => user.id === obs.id))
+      map(users => users.find(user => user.id === id))
     );
   }
-  // only:
-  //   First name:
-  //   Last name:
-  //   Age:
-  // City:
 
-  getFilteredUsers(filter: { key: string, value: any }[]): Observable<User> {
+  getFilteredUsers(filter: { key: string, value: any }[]): Observable<User[]> {
+
+    return this.getUsers().pipe(
+      map(users => this.syncFilter(filter, users))
+    );
+  }
+
+  private syncFilter(filter: { key: string, value: any }[], users: User[]): User[] {
     const filteredUsers: User[] = [];
-    this.getUsers().forEach( user => {
-          if (user[key].toString() === user.value.toString()) {
-            filteredUsers.push(user);
-          }
-        });
-
-
-
-    //   filter.forEach( element => {
-    //       if (user[element.key].toString() === element.value.toString()) {
-    //         filteredUsers.push(user);
-    //       }
-    //   });
-    // });
+    users.forEach(user => {
+      filter.forEach(element => {
+        if (user[element.key].toString() === element.value.toString()) {
+          filteredUsers.push(user);
+        }
+      });
+    });
     return filteredUsers;
   }
 }

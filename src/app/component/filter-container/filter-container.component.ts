@@ -11,9 +11,8 @@ import {Observable} from 'rxjs';
 })
 export class FilterContainerComponent implements OnInit {
 
-  users: Observable<User>;
-  user: Observable<User>;
-
+  users: User[];
+  user: User;
   constructor(private route: ActivatedRoute,
               private userService: UserService) { }
 
@@ -21,12 +20,18 @@ export class FilterContainerComponent implements OnInit {
     const filter = [];
     this.route.params.subscribe(params => {
       if (params.id) {
-        this.user = this.userService.getUserById(params.id);
+        this.userService.getUserById(params.id).subscribe(
+          (user: User) => {
+            this.user = user;
+          }
+        );
       } else {
         Object.keys(params).forEach((key) =>
           filter.push({ key, value: params[key]})
         );
-        this.users = this.userService.getFilteredUsers(filter);
+        this.userService.getFilteredUsers(filter).subscribe(users =>
+          this.users = users
+        );
       }
     });
   }
