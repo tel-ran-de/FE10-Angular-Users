@@ -3,6 +3,7 @@ import {User} from '../../model/user';
 import {UserService} from '../../service/user.service';
 import {ActivatedRoute} from '@angular/router';
 import {flatMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-user-layout',
@@ -11,6 +12,7 @@ import {flatMap} from 'rxjs/operators';
 })
 export class UserLayoutComponent implements OnInit {
   user: User;
+  asyncUser: Observable<User>;
 
   constructor(private route: ActivatedRoute, private userService: UserService) { }
 
@@ -18,6 +20,13 @@ export class UserLayoutComponent implements OnInit {
     this.route.params.pipe(
       flatMap(params => this.userService.getUserById(params.id))
     ).subscribe(user => this.user = user);
+    this.asyncUser = this.getUser();
   }
+
+  getUser(): Observable<User> {
+    return this.route.params.pipe(
+      flatMap(params => this.userService.getUserById(params.id))
+    );
+}
 
 }
