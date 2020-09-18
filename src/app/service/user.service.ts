@@ -24,11 +24,9 @@ export class UserService {
   }
 
   getFilteredUsers(filter: {key: string, value: any}[]): Observable<User[]> {
-
     return this.getUsers().pipe(
-
+      map(users => this.syncFilter(filter, users))
     );
-
   }
 
   private syncFilter(filter: {key: string, value: any}[], users: User[]): User[] {
