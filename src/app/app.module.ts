@@ -7,13 +7,15 @@ import { UserComponentComponent } from './component/user-component/user-componen
 import { FilterContainerComponent } from './component/filter-container/filter-container.component';
 import { UsersContainerComponent } from './component/users-container/users-container.component';
 import {HttpClientModule} from '@angular/common/http';
+import { UserLayoutComponent } from './component/user-layout/user-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponentComponent,
     FilterContainerComponent,
-    UsersContainerComponent
+    UsersContainerComponent,
+    UserLayoutComponent
   ],
   imports: [
     BrowserModule,
